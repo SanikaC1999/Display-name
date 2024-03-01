@@ -9,7 +9,9 @@ export default function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-    setFullName(`${firstName} ${lastName}`);
+    if (firstName.trim() !== "" || lastName.trim() !== "") {
+      setFullName(`${firstName.trim()} ${lastName.trim()}`);
+    }
   };
 
   return (
@@ -20,10 +22,11 @@ export default function App() {
         <input type="text" placeholder="LastName" value={lastName} onChange={handleChange2} />
         <button type="submit">Submit</button>
       </form>
-      {fullName !== "" ? <h2>Full Name: {fullName}</h2> : "Full Name"}
+      {fullName !== "" && <h2>Full Name: {fullName}</h2>}
     </div>
   );
 }
+
 
 
 
