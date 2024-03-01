@@ -6,18 +6,25 @@ export default function App() {
   const [lastName, setLastName] = useState("");
   const handleChange2 = (event) => setLastName(event.target.value);
   const [fullName, setFullName] = useState("");
-  const handleSubmit = () => setFullName(`${firstName} ${lastName}`);
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+    setFullName(`${firstName} ${lastName}`);
+  };
 
   return (
     <div className="App">
       <h1>Full Name Display</h1>
-      <input type="text" placeholder="FirstName" onChange={handleChange} />
-      <input type="text" placeholder="LastName" onChange={handleChange2} />
-      <button type="button" onClick={handleSubmit}>
-        Submit
-      </button>
-      {fullName ? <h2>Full Name: {fullName}</h2> : "Full Name:"}
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="FirstName" value={firstName} onChange={handleChange} />
+        <input type="text" placeholder="LastName" value={lastName} onChange={handleChange2} />
+        <button type="submit">Submit</button>
+      </form>
+      {fullName !== "" ? <h2>Full Name: {fullName}</h2> : "Full Name"}
     </div>
   );
 }
+
+
+
 
